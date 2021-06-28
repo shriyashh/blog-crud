@@ -91,10 +91,8 @@ def userprofile(request):
 def userdashboard(request, id):
     if request.user.is_authenticated:
         dashbordDetails = User.objects.get(pk=id)
-        user = request.user
-        posts = BlogPost.objects.filter(author=user) 
         form = AdminProfileForm(instance=dashbordDetails)
-        return render(request, 'userdashboard.html', {'form': form, 'posts':posts})
+        return render(request, 'userdashboard.html', {'form': form})
     else:
         return HttpResponseRedirect('/login/')
 
