@@ -4,14 +4,10 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, User
 from django.contrib.auth.models import User
 from .models import BlogPost, Connectus
 from django.utils.translation import gettext, gettext_lazy as _
-# from ckeditor_uploader.widgets import CKEditorWidget, CKEditorUploadingWidget
-# from ckeditor.widgets import CKEditorWidget , CKEditorUploadingWidget
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class BlogPostForm(forms.ModelForm):
-    # updated =  forms.DateTimeField(label='Updated On', widget=forms.DateTimeInput(attrs={'class': 'form-control'}))
-    # created = forms.DateTimeField(label='Created On', widget=forms.DateTimeInput(attrs={'class': 'form-control'}))
     class Meta:
          model = BlogPost
          fields = ['title', 'author', 'blog_post']

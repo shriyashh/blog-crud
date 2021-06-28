@@ -141,12 +141,6 @@ def addpost(request):
         if request.method == 'POST':
             form = BlogPostForm(request.POST)
             if form.is_valid():
-                # title = form.cleaned_data['title']
-                # author = form.cleaned_data['author']
-                # blog_post = form.cleaned_data['blog_post']
-                # updated = form.cleaned_data['updated']
-                # created = form.cleaned_data['created']
-                # p = BlogPostForm(title=title, blog_post=blog_post, author=author, updated=updated, created=created)
                 form.save()
                 form = BlogPostForm()
         else:
