@@ -1,0 +1,54 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- <div class="col-sm-12">
+    <div class="card">
+        <img src="" style="height: 250px;"; class="rounded" alt="">
+      </div>
+</div><br> -->
+
+
+<div class="container my-5">
+  <a href="{% url 'addpost' %}" class="text-center btn btn-sm btn-primary">Add New Blog Post</a>
+  <br><br>
+    {% if posts %}
+    <table class="table table-hover shadow-sm p-5 mb-5 bg-light my-5">
+      <thead>
+        <tr class="text-center">
+          <th scope="col">Id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Post</th>
+          <th scope="col">Updated</th>
+          <th scope="col">Created</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in posts %}
+        <tr>
+          <th scope="row">{{post.id}}</th>
+          <td class="text-justify">{{post.title}}</td>
+          <td class="text-justify">{{post.author}}</td>
+          <td class="text-justify">{{post.blog_post|safe|slice:':300'}}......</td>
+          <td>{{post.updated}}</td>
+          <td>{{post.created}}</td>
+          <td class='text-center'>
+            <a href="{% url 'updatepost' post.id %}" class="btn btn-sm btn-primary">Edit Post</a> 
+            
+            {% if perms.mywebsite.delete_post %}
+              <form action="{% url 'deletepost' post.id %}" method="POST" class="">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+              </form>
+            {% endif %}
+          
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock content %}

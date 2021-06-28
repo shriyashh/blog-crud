@@ -1,0 +1,25 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container my-5">
+    {% for post in posts %}
+    <div class="row my-3">
+        <!-- <div class="col-sm-4 text-center align-self-center">
+            <img class="img-fluid img-thumbnail shadow-sm" src="{{ post.blogpostimage.url }}" height="250"
+                width="250" /><br>
+        </div> -->
+        <div class="col-sm-8 align-self-center">
+            <h3 class="text-primary mb-3"><em>Title : {{post.title}}</em></h3>
+            <small> Updated On : {{post.updated}}</small>
+            <small>Created On : {{post.created}}<br></small>
+            <h6 class="">Author : {{post.author}}</h6><hr>
+            <p class="">{{post.blog_post|safe|slice:':600'}}......</p>
+            <a class='text-alert alert-danger' href="{% url 'readmoreblog' post.id %}">Read more</a>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</div>
+{% endblock content %}

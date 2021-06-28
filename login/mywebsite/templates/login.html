@@ -1,0 +1,36 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="my-5 container mt-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card" style="height: 390px;">
+                <img src="/static/image/5.jpg" class="rounded" alt="">
+              </div>
+        </div>
+        <div class="col-sm-6 shadow-lg p-5 mb-5 bg-light">
+            <form class='' action="" method="POST">
+                <h4>Login yourself here :</h4>
+                <hr>
+                {% csrf_token %}
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                {{error}}
+                {% endfor %}
+                {% endif %}
+
+                {% for fm in form %}
+                <div class="form-group">
+                    {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}<br>
+                </div>
+                {% endfor %}
+                <input type="submit" class="btn btn-primary" value="Login"></input>
+                <small>Yet not<a href="{% url 'register' %}"> register!!! </a></small>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

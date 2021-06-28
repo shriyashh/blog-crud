@@ -1,0 +1,27 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+<div class="my-5 container">
+  <form class='shadow-lg p-5 mb-5 bg-light' action="" method="POST">
+    {% csrf_token %}
+    {% for fm in form %}
+    <div class="form-group">
+      {{fm.label_tag}} {{fm}} {{fm.errors|striptags}}<br>
+    </div>
+    {% endfor %}
+
+    <form action="" method="POST" class="d-inline">
+      {% csrf_token %}
+      <input type="submit" class="btn btn-sm btn-primary" value="Update Post"> |
+      <a href="{% url 'blogdashboard' %}" class="btn btn-sm btn-primary">Back</a>
+
+    </form>
+</div>
+
+<!-- 
+<script>
+  var name = '{{ author.id }}';
+  document.getElementById('currentuser').value=name;
+</script> -->
+{% endblock content %}

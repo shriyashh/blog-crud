@@ -1,0 +1,38 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="my-5 container mt-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <img src="/static/image/7.jpg" class="rounded" alt="">
+              </div>
+        </div>
+        <div class="col-sm-6">
+            <form class="shadow-sm p-5 mb-5 bg-light rounded mt-5" action="" method="POST">
+                {% csrf_token %}
+                {% for fm in form %}
+                <div class="form-group">
+                    {{fm.label_tag}}
+                    <div class="">{{fm}}
+                        {{fm.errors|striptags}}
+                    </div>
+                    <br>
+                </div>
+                {% endfor %}
+                <input type="submit" class="btn btn-primary" value="Save"></input>
+                {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                <p>{{error}}</p>
+                {% endfor %}
+                {% endif %}
+                <a href="">Back</a> | <a href="{% url 'logout' %}">Logout</a>
+            </form>
+        </div>
+    </div>   
+</div>     
+
+
+{% endblock content %}
