@@ -1,0 +1,22 @@
+
+
+<nav class="main_navbar">
+    <div class="container">
+        <div class="left_nav">SHRIYASH</div>
+        <div class="middle_nav">
+            <ul class="nav_items">
+                {% if request.user.is_authenticated %}
+                <li class="nav_item"><a href="{% url 'profile' %}">User Section</a></li>
+                {% else %}
+                <li class="nav_item"><a href="{% url 'index' %}" class="active">Home</a></li>
+                <li class="nav_item"><a href="{% url 'register' %}">Register</a></li>
+                <li class="nav_item"><a href="{% url 'login' %}">Log in</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="maintag1"><h3 class="text-center">Welcome!</h3></div>
+
+    </div>
+</nav>

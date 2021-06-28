@@ -153,3 +153,11 @@ CKEDITOR_CONFIGS = {
         'toolbar': None,
     },
 }
+
+
+
+
+
+
+
+# FROALA_UPLOAD_PATH = 'image/blogimage'

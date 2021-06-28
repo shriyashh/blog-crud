@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+
 <div class="container my-5">
   <a href="{% url 'addpost' %}" class="text-center btn btn-sm btn-primary">Add New Blog Post</a>
   <br><br>
@@ -29,14 +30,10 @@
           <td>{{post.created}}</td>
           <td class='text-center'>
             <a href="{% url 'updatepost' post.id %}" class="btn btn-sm btn-primary">Edit Post</a> 
-            
-            {% if perms.mywebsite.delete_post %}
               <form action="{% url 'deletepost' post.id %}" method="POST" class="">
                 {% csrf_token %}
                 <input type="submit" class="btn btn-sm btn-danger" value="Delete">
               </form>
-            {% endif %}
-          
           </td>
         </tr>
         {% endfor %}

@@ -23,7 +23,7 @@ def readmoreblog(request, id):
     else:
         return HttpResponseRedirect('/login/')
 
-        
+   
 def userregister(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -67,21 +67,23 @@ def userprofile(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             if request.user.is_superuser == True:
+                posts = BlogPost.objects.all()
                 form = AdminProfileForm(request.POST, instance=request.user)
                 users = User.objects.all()
-            else:
+            else:       
                 form = UserProfileForm(request.POST, instance=request.user)
                 users = None
             if form.is_valid():
                 form.save()
         else:
             if request.user.is_superuser == True:
+                posts = BlogPost.objects.all()
                 form = AdminProfileForm(instance=request.user)
                 users = User.objects.all()
             else:
                 form = UserProfileForm(instance=request.user)
                 users = None
-        return render(request, 'profile.html', {'name': request.user.username, 'form': form, 'users': users})
+        return render(request, 'profile.html', {'name': request.user.username, 'posts':posts,'form': form, 'users': users})
     else:
         return HttpResponseRedirect('/login/')
 
@@ -89,8 +91,10 @@ def userprofile(request):
 def userdashboard(request, id):
     if request.user.is_authenticated:
         dashbordDetails = User.objects.get(pk=id)
+        user = request.user
+        posts = BlogPost.objects.filter(author=user) 
         form = AdminProfileForm(instance=dashbordDetails)
-        return render(request, 'userdashboard.html', {'form': form})
+        return render(request, 'userdashboard.html', {'form': form, 'posts':posts})
     else:
         return HttpResponseRedirect('/login/')
 
@@ -174,86 +178,3 @@ def deletepost(request, id):
     else:
         return HttpResponseRedirect('/login/')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def whoweare(request):
-#     if request.user.is_authenticated:
-#         return render(request, 'whoweare.html')
-#     else:
-#         return HttpResponseRedirect('/login/')
-
-
-# def ourservices(request):
-#     if request.user.is_authenticated:
-#         return render(request, 'ourservices.html')
-#     else:
-#         return HttpResponseRedirect('/login/')
-
-
-# def contactus(request):
-#     if request.user.is_authenticated:
-#         if request.method == 'POST':
-#             form = ConnectusForm(request.POST)
-#             if form.is_valid():
-#                 form.save()
-#                 form = ConnectusForm()
-#         else:
-#             form = ConnectusForm()    
-#         return render(request, 'contactus.html', {'form':form})
-#     else:
-#         return HttpResponseRedirect('/login/')

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="my-4 maintag4"><h3 class="text-center">Connect with Us</h3></div>
+
+<div class="my-5 container shadow-lg p-5 mb-5 bg-light">
+    <div class="row mt-4">
+        <div class="col-sm-6">
+            <div class="card">
+                <img style="width:500; height:800;" class='card-img-top' src="/static/image/4.jpg" class="rounded" alt="">
+              </div>
+        </div>
+        <div class="col-sm-6">
+            <form action="" method="POST" class="">
+                {% csrf_token %}
+                {{form.as_p}}      
+                <button type="submit" class="btn btn-primary btn-transparent btn-sm">Submit</button>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %} 

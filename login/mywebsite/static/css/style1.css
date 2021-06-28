@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+
+
+*{
+    margin: 0%;
+    padding: 0%;
+    text-decoration: none!important;
+    list-style-type: none;
+
+}
+
+html{
+    font-size: 90.5%;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 700px) {
+  .sidebar1 {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar1 a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar1 a {
+    text-align: center;
+    float: none;
+  }
+}
+
+
+
+
+@media screen and (max-width: 700px) {
+  .sidebar2 {
+    width: 100%;
+    height: auto;
+    position: static;
+  }
+  .sidebar2 a {float: right;}
+  div.content {margin-right: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar2 a {
+    text-align: center;
+    float: none;
+  }
+}
