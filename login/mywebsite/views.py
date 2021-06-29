@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 from .forms import SignupForm, LoginForm, PasswordChangeOne, PasswordChangeTwo
 from .forms import UserProfileForm, AdminProfileForm
 from .forms import BlogPostForm, ConnectusForm
@@ -9,7 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import BlogPost
 from django.contrib.auth.models import Group
-
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
@@ -19,11 +20,19 @@ def index(request):
 def readmoreblog(request, id):
     if request.user.is_authenticated:
         post = BlogPost.objects.get(pk=id) 
-        return render(request, 'readmoreblog.html', {'post': post})
+        blogpostlikes = post.blogpostlikes()
+        return render(request, 'readmoreblog.html', {'post': post, 'blogpostlikes':blogpostlikes})
     else:
         return HttpResponseRedirect('/login/')
 
-   
+def likes(request, id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(BlogPost, id=request.POST.get('post_id'))
+        post.likes.add(request.user)
+        return HttpResponseRedirect(reverse('readmoreblog', args=[str(id)]))
+    else:
+        return HttpResponseRedirect('/login/')
+
 def userregister(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
