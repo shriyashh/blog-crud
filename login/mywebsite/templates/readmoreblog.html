@@ -14,10 +14,21 @@
             </div>
         </div>
     </div>
+
     <form action="{% url 'likes' post.id %}" method='POST'>
         {% csrf_token %}
-        <button type="submit" name='post_id' value="{{post.id}}" class='btn btn-primary'>
-        {{blogpostlikes}} Likes</button> 
+        {% if user.is_authenticated %}
+            {% if liked %}
+                <button type="submit" name='post_id' value="{{post.id}}" class='btn btn-danger'>Unlike</button>
+            {% else }
+                <button type="submit" name='post_id' value="{{post.id}}" class='btn btn-primary'>Like</button>
+            {% endif %}
+        {% else %}
+            <small class='alert alert-warning'>'You must <a href="{% url 'login' %}"> Logged </a> in to hit Like!'</small>
+        {% endif %}
+
+            {{blogpostlikes}} Likes 
+        
     </form>
 </div>
 

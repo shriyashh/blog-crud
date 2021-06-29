@@ -21,14 +21,23 @@ def readmoreblog(request, id):
     if request.user.is_authenticated:
         post = BlogPost.objects.get(pk=id) 
         blogpostlikes = post.blogpostlikes()
-        return render(request, 'readmoreblog.html', {'post': post, 'blogpostlikes':blogpostlikes})
+        liked = False
+        if blogpostlikes.likes.filter(id=request.user.id).exists():
+            liked = True
+            return render(request, 'readmoreblog.html', {'post': post, 'blogpostlikes':blogpostlikes, 'liked':liked })
     else:
         return HttpResponseRedirect('/login/')
 
 def likes(request, id):
     if request.user.is_authenticated:
         post = get_object_or_404(BlogPost, id=request.POST.get('post_id'))
-        post.likes.add(request.user)
+        liked = False
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+            liked = False
+        else:
+            post.likes.add(request.user)
+            liked = True
         return HttpResponseRedirect(reverse('readmoreblog', args=[str(id)]))
     else:
         return HttpResponseRedirect('/login/')
